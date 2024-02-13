@@ -73,7 +73,7 @@
 .your-own-api-key__inner {
 	display: flex;
 	flex-direction: row;
-	max-width: 300px;
+	max-width: 40px;
 	width: 100%;
 	gap: 4px;
 	background-color: var(--color-low);

@@ -24,7 +24,6 @@ export async function getHtmlFromOpenAI({
 	}
 	previousPreviews?: PreviewShape[]
 }) {
-	if (!apiKey) throw Error('You need to provide an API key (sorry)')
 
 	const messages: GPT4VCompletionRequest['messages'] = [
 		{
@@ -98,17 +97,15 @@ export async function getHtmlFromOpenAI({
 		messages,
 		seed: 42,
 		n: 1,
+		stream:false
 	}
 
 	let json = null
 
 	try {
-		const resp = await fetch('https://api.openai.com/v1/chat/completions', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${apiKey}`,
-			},
+
+		const resp = await fetch(`/api/openai`, {
+			method: 'POST', 
 			body: JSON.stringify(body),
 		})
 		json = await resp.json()
@@ -139,7 +136,7 @@ type MessageContent =
 	  )[]
 
 export type GPT4VCompletionRequest = {
-	model: 'gpt-4-vision-preview'
+	model: 'gpt-4-vision-preview' |'gpt-4-1106-vision-preview'
 	messages: {
 		role: 'system' | 'user' | 'assistant' | 'function'
 		content: MessageContent

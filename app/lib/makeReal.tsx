@@ -1,15 +1,15 @@
-import { Editor, createShapeId, getSvgAsImage, track } from '@tldraw/tldraw'
-import { getSelectionAsText } from './lib/getSelectionAsText'
-import { getHtmlFromOpenAI } from './lib/getHtmlFromOpenAI'
-import { blobToBase64 } from './lib/blobToBase64'
-import { addGridToSvg } from './lib/addGridToSvg'
-import { PreviewShape } from './PreviewShape/PreviewShape'
+import { Editor, createShapeId, getSvgAsImage } from '@tldraw/tldraw'
+import { PreviewShape } from '../PreviewShape/PreviewShape'
+import { addGridToSvg } from './addGridToSvg'
+import { blobToBase64 } from './blobToBase64'
+import { getHtmlFromOpenAI } from './getHtmlFromOpenAI'
+import { getSelectionAsText } from './getSelectionAsText'
 
 export async function makeReal(editor: Editor, apiKey: string) {
 	// Get the selected shapes (we need at least one)
 	const selectedShapes = editor.getSelectedShapes()
 
-	if (selectedShapes.length === 0) throw Error('First select something to make real.')
+	if (selectedShapes.length === 0) throw Error('先选择图形再生成APP')
 
 	// Create the preview shape
 	const { maxX, midY } = editor.getSelectionPageBounds()!
